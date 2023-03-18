@@ -24,7 +24,8 @@
     <h4>INSTRUCTIONS</h4>
     **You can clone this repo on your desktop. 
     1. open index.html file (located in skygui folder) in browser
-    2. in terminal make sure you have "sudo apt-get install ros-humble-rosbridge-*" You'll only need to do this once. You can open the terminal from desktop, from within the main folder or anywhere. 
+    2. in terminal make sure you have "sudo apt-get install ros-humble-rosbridge-*" <br>
+    You'll only need to do this once. You can open the terminal from desktop, from within the main folder or anywhere. 
     3. in terminal type: "source /opt/ros/humble/setup.sh" and then "ros2 launch rosbridge_server rosbridge_websocket_launch.xml"
     4. in a 2nd terminal, run 'source': source /opt/ros/humble/setup.bash
     5. in the same 2nd termal run: ros2 topic pub /my_topic std_msgs/String "data: 'helllllo world'"
@@ -36,5 +37,8 @@
 **OpenMCT folder is included as the base folder to build off of for the project. It contains the base material for us to get started.**
 
 
-<h3>ROS2 Nodes and Topics</h3>
+<h3>V. ROS2 Nodes and Topics</h3>
 ROS2 Nodes will be placed in this folder. Put them in the appropriate folder on your computer. In the meantime, I will add ROS2 within this repo.
+
+
+<h3>V. Set Up ROS2 Network Over Multiple Machines</h3>
