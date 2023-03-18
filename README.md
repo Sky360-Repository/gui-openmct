@@ -3,21 +3,21 @@
 
 ** All other Sky360GUI Repos are obsolete although some code will be reused. **
 
-<h3>Docker build is pending.</h3>In the meantime, you can install all necessary software on a linux ubuntu environment.
+<h3>I. Docker build is pending.</h3>In the meantime, you can install all necessary software on a linux ubuntu environment.
 
 1. Install Python
 2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 3. Install Node.js and NPM. They are bundled together. https://nodejs.org/en/download
 
 
-<h3>ROSBRIDGE</h3>
+<h3>II. ROSBRIDGE</h3>
 1. ROS2 sends data in DDS packets. The web browser consumes data via TCP packets. <br>
 2. Rosbridge will transform DDS to TCP so that the GUI can use the data. <br>
 3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
-4. Instructions to use are listed below in "OpenMCT Tutorial".
+4. Instructions to use are listed below in "Have Data Appear on GUI Using ROS2, RosbridgeI> ".
 
 
-<h3>Have Data Appear on GUI Using ROS2, Rosbridge</h3>
+<h3>III. Have Data Appear on GUI Using ROS2, Rosbridge</h3>
 **This is a very preliminary sample only placed here so others can get quickly up to speed.**
 **For this sample, neither openmct or node.js are needed. You only need ROS2 and python already installed. This demo will create a topic on the fly. You will not need to individually code a topic or ros2 node for this example.**
 
@@ -32,5 +32,9 @@
      '/topic" and use 'ros2 topic pub /topic std_msgs/String "data: 'what's up?'"
      
  
-<h3>Openmct-Tutorial</h3>
+<h3>IV. Openmct-Tutorial</h3>
 **OpenMCT folder is included as the base folder to build off of for the project. It contains the base material for us to get started.**
+
+
+<h3>ROS2 Nodes and Topics</h3>
+ROS2 Nodes will be placed in this folder. Put them in the appropriate folder on your computer. In the meantime, I will add ROS2 within this repo.

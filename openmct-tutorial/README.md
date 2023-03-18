@@ -4,30 +4,16 @@ These tutorials will walk you through the simple process of integrating your tel
 
 ## Tutorial Prerequisites
 
-* [node.js](https://nodejs.org/en/)
-    * Mac OS: We recommend using [Homebrew](https://brew.sh/) to install node.
-    ```
-    $ brew install node
-    ```
-    * Windows: https://nodejs.org/en/download/
-    * linux: https://nodejs.org/en/download/
-* [git](https://git-scm.com/)
-    * Mac OS: If XCode is installed, git is likely to already be available from your command line. If not, git can be installed using [Homebrew](https://brew.sh/).
-    ```
-    $ brew install git
-    ```
-    * Windows: https://git-scm.com/downloads
-    * linux: https://git-scm.com/downloads
-
 Neither git nor node.js are requirements for using Open MCT, however this tutorial assumes that both are installed. Also, command line familiarity is a plus, however the tutorial is written in such a way that it should be possible to copy-paste the steps verbatim into a POSIX command line.
 
 ## Installing the tutorials
 
 ```
-git clone https://github.com/nasa/openmct-tutorial.git
-cd openmct-tutorial
-npm install
-npm start
+1. git clone https://github.com/nasa/openmct-tutorial.git
+Skip step 1, as if you have cloned the gui-openmct repo, then you have already cloned this repo as well. 
+2. cd openmct-tutorial
+3. npm install
+4. npm start
 ```
 
 This will clone the tutorials and install Open MCT from NPM.  It will also install the dependencies needed to run the provided telemetry server. The last command will start the server. The telemetry server provided is for demonstration purposes only, and is not intended to be used in a production environment.
