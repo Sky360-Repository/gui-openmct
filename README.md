@@ -13,5 +13,5 @@
 <h3>ROSBRIDGE</h3>
 1. ROS2 sends data in DDS packets. The web browser consumes data via TCP packets. <br>
 2. Rosbridge will transform DDS to TCP so that the GUI can use the data. <br>
-3. Ros2Bridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
+3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
 
