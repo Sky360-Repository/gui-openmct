@@ -6,8 +6,8 @@
 <h3>Docker build is pending.</h3>In the meantime, you can install all necessary software on a linux ubuntu environment.
 
 1. Install Python
-2. Install ROS2 and all required dependencies
-3. Install Node.js and NPM
+2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+3. Install Node.js and NPM. They are bundled together. https://nodejs.org/en/download
 
 
 <h3>ROSBRIDGE</h3>
