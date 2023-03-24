@@ -8,6 +8,7 @@
     <script src="historical-telemetry-plugin.js"></script>
     <script src="realtime-telemetry-plugin.js"></script>
     <script src="admin-plugin.js"></script>
+    <script src="station-plugin.js"></script>
 </head>
 <body>
     <script>
@@ -22,6 +23,7 @@
 
         
         openmct.install(AdminPlugin());        
+        openmct.install(StationPlugin());
         openmct.install(DictionaryPlugin());
         openmct.install(HistoricalTelemetryPlugin());
         openmct.install(RealtimeTelemetryPlugin());
