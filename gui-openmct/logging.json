@@ -1,10 +1,10 @@
 {
-    "name": "Station",
-    "key": "es",
+    "name": "Tracker/Station Logs",
+    "key": "ad",
     "measurements": [
         {
-            "name": "Camera Feed",
-            "key": "prop.cameraFeed",
+            "name": "User Information",
+            "key": "prop.userinformation",
             "values": [
                 {
                     "key": "value",
@@ -29,8 +29,8 @@
             ]
         },
         {
-            "name": "PTF Feed",
-            "key": "prop.ptfFeed",
+            "name": "Select Hardware",
+            "key": "prop.hardware",
             "values": [
                 {
                     "key": "value",
@@ -62,8 +62,8 @@
             ]
         },
         {
-            "name": "Integrated Map",
-            "key": "comms.integratedMap",
+            "name": "Select Online APIs",
+            "key": "comms.onlineapis",
             "values": [
                 {
                     "key": "value",
@@ -86,8 +86,8 @@
             ]
         },
         {
-            "name": "Flight Data Hardware",
-            "key": "comms.flightDataHardware",
+            "name": "Enter API Keys",
+            "key": "comms.apikeys",
             "values": [
                 {
                     "key": "value",
@@ -110,8 +110,8 @@
             ]
         },
         {
-            "name": "Flight Data Online API",
-            "key": "pwr.flightDataAPI",
+            "name": "Enter Longitude / Latitude (Optional)",
+            "key": "pwr.placeholdera",
             "values": [
                 {
                     "key": "value",
@@ -134,80 +134,8 @@
             ]
         },
         {
-            "name": "ISS Data Online API",
-            "key": "pwr.ISSDataAPI",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "℃",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Station Climate Controls",
-            "key": "pwr.stationClimate",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "℃",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },             
-        {
-            "name": "Weather Data Online API",
-            "key": "pwr.weatherDataAPI",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "℃",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },           
-        {
-            "name": "Satellite Data Hardware",
-            "key": "pwr.satelliteDataHardware",
+            "name": "Placeholder B",
+            "key": "pwr.placeholderb",
             "values": [
                 {
                     "key": "value",
@@ -230,32 +158,8 @@
             ]
         },
         {
-            "name": "Wit-Motion Data",
-            "key": "pwr.witmotionData",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "℃",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },        
-        {
-            "name": "Satellite Data Online API",
-            "key": "pwr.satelliteDataOnline",
+            "name": "Placeholder C",
+            "key": "pwr.placeholderc",
             "values": [
                 {
                     "key": "value",

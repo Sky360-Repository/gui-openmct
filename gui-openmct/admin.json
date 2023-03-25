@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "Hardware",
+            "name": "Select Hardware",
             "key": "prop.hardware",
             "values": [
                 {
@@ -62,7 +62,7 @@
             ]
         },
         {
-            "name": "Online APIs",
+            "name": "Select Online APIs",
             "key": "comms.onlineapis",
             "values": [
                 {
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "API Keys",
+            "name": "Enter API Keys",
             "key": "comms.apikeys",
             "values": [
                 {
@@ -110,7 +110,7 @@
             ]
         },
         {
-            "name": "Placeholder A",
+            "name": "Enter Longitude / Latitude (Optional)",
             "key": "pwr.placeholdera",
             "values": [
                 {
