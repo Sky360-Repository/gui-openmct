@@ -38,9 +38,13 @@
      '/topic" and use 'ros2 topic pub /topic std_msgs/String "data: 'helllllo world'"<br>
      
  
-<h3>IV. Openmct-Tutorial</h3>
-**OpenMCT folder is included as the base folder to build off of for the project. It contains the base material for us to get started.**
-The folder is labled 'gui-openmct'. Using terminal, CD into that folder and type 'npm install' and once it is finished install all node packages, type 'npm start'. Then in the browser, type 'localhost:8080' and you should see the openmct GUI. These directions are also located in the ReadMe located in the 'gui-openmct' folder.
+<h3>IV. Openmct-Tutorial / Base GUI Folder</h3>
+**OpenMCT Tutorial folder is included as the base folder to build off of for the project. It contains the base material for us to get started.**<br>
+1. The folder is labled 'gui-openmct'. <br>
+2. Using terminal, CD into that folder and type 'npm install' and once it is finished install all node packages, type 'npm start'. <br>
+3. Then in the browser, type 'localhost:8080' and you should see the openmct GUI. <br> 
+
+These directions are also located in the ReadMe located in the 'gui-openmct' folder.
 
 
 <h3>V. ROS2 Nodes and Topics</h3>
