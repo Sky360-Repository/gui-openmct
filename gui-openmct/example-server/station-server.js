@@ -1,15 +1,15 @@
 /*
- Spacecraft.js simulates a small spacecraft generating telemetry.
+ aka Spacecraft.js simulates a small spacecraft generating telemetry.
 */
 
-function Spacecraft() {
+function Spacecrafts() {
     this.state = {
         "prop.fuel": 77,
         "prop.thrusters": "OFF",
         "comms.recd": 0,
         "comms.sent": 0,
         "pwr.temp": 245,
-        "pwr.c": 8.15,
+        "pwr.c": 8.15, 
         "pwr.v": 30
     };
     this.history = {};
@@ -23,8 +23,8 @@ function Spacecraft() {
         this.generateTelemetry();
     }.bind(this), 1000);
 
-    console.log("Example spacecraft launched!");
-    console.log("Press Enter to toggle thruster state.");
+    console.log("Example spacecraft launched! Ya think?");
+    console.log("Press Enter to toggle thruster state.Boo hoo!");
 
     process.stdin.on('data', function () {
         this.state['prop.thrusters'] =
@@ -35,7 +35,7 @@ function Spacecraft() {
     }.bind(this));
 };
 
-Spacecraft.prototype.updateState = function () {
+Spacecrafts.prototype.updateState = function () {
     this.state["prop.fuel"] = Math.max(
         0,
         this.state["prop.fuel"] -
@@ -55,7 +55,7 @@ Spacecraft.prototype.updateState = function () {
  * Takes a measurement of spacecraft state, stores in history, and notifies 
  * listeners.
  */
-Spacecraft.prototype.generateTelemetry = function () {
+Spacecrafts.prototype.generateTelemetry = function () {
     var timestamp = Date.now(), sent = 0;
     Object.keys(this.state).forEach(function (id) {
         var state = { timestamp: timestamp, value: this.state[id], id: id};
@@ -65,13 +65,13 @@ Spacecraft.prototype.generateTelemetry = function () {
     }, this);
 };
 
-Spacecraft.prototype.notify = function (point) {
+Spacecrafts.prototype.notify = function (point) {
     this.listeners.forEach(function (l) {
         l(point);
     });
 };
 
-Spacecraft.prototype.listen = function (listener) {
+Spacecrafts.prototype.listen = function (listener) {
     this.listeners.push(listener);
     return function () {
         this.listeners = this.listeners.filter(function (l) {
@@ -81,5 +81,5 @@ Spacecraft.prototype.listen = function (listener) {
 };
 
 module.exports = function () {
-    return new Spacecraft()
+    return new Spacecrafts()
 };

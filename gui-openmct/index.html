@@ -4,12 +4,12 @@
     <title>Sky360 Station</title>
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
-    <script src="dictionary-plugin.js"></script>
+    <!-- <script src="dictionary-plugin.js"></script> -->
     <script src="historical-telemetry-plugin.js"></script>
     <script src="realtime-telemetry-plugin.js"></script>
-    <script src="admin-plugin.js"></script>
+    <script src="admin-plugin.js"></script> 
     <script src="station-plugin.js"></script>
-    <script src="logging-plugin.js"></script>
+    <script src="logging-plugin.js"></script> 
 </head>
 <body>
     <script>
@@ -23,9 +23,9 @@
         openmct.install(openmct.plugins.Espresso());
 
         openmct.install(StationPlugin());        
-        openmct.install(AdminPlugin());        
-        openmct.install(LoggingPlugin());
-        /* openmct.install(DictionaryPlugin()); */
+        openmct.install(AdminPlugin());       
+        openmct.install(LoggingPlugin());  
+        /* openmct.install(DictionaryPlugin()); */  
         openmct.install(HistoricalTelemetryPlugin());
         openmct.install(RealtimeTelemetryPlugin());
 

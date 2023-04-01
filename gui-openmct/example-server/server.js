@@ -7,10 +7,6 @@ var RealtimeServer = require('./realtime-server'); // tutorial file
 var HistoryServer = require('./history-server'); // tutorial file
 var StaticServer = require('./static-server'); // tutorial file
 
-var StationServer = require('./station-server');
-var AdministrationServer = require('./administration');
-var LoggingServer = require('./loggingserver');
-
 
 var expressWs = require('express-ws');
 var app = require('express')();
@@ -21,9 +17,6 @@ var realtimeServer = new RealtimeServer(spacecraft);
 var historyServer = new HistoryServer(spacecraft);
 var staticServer = new StaticServer();
 
-var stationServer = new StationServer();
-var administrationServer = new AdministrationServer();
-var loggingServer = new LoggingServer();
 
 
 app.use('/realtime', realtimeServer);

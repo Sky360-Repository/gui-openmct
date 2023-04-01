@@ -14,7 +14,7 @@
 1. ROS2 sends data via Data Distribution Service (DDS) https://docs.ros.org/en/humble/Installation/DDS-Implementations.html The web browser consumes data via TCP packets. <br>
 2. Rosbridge will transform DDS to TCP so that the GUI can use the data. <br>
 3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
-4. Instructions to use are listed below in "Have Data Appear on GUI Using ROS2, RosbridgeI> ".
+4. Instructions to use Rosbridge are listed below in "Have Data Appear on GUI Using ROS2, Rosbridge".
 
 
 <h3>III. Have Data Appear on GUI Using ROS2, Rosbridge</h3>
@@ -22,7 +22,7 @@
 **For this sample, neither openmct nor node.js are needed. You only need ROS2 and python already installed. This demo will create a topic on the fly. You will not need to individually code a topic or ros2 node for this example.**
 
 <h4>INSTRUCTIONS</h4>
-    **You can clone this repo on your desktop.**
+    **You can clone this repo on your desktop.**<br>
     
 1. open index.html file (located in skygui folder) in browser.<br>
 
@@ -33,16 +33,19 @@
 
 4. in a 2nd terminal, run 'source': source /opt/ros/humble/setup.bash <br>
 
-5. in the same 2nd termal run: ros2 topic pub /my_topic std_msgs/String "data: 'helllllo world'"
+5. in the same 2nd termal run: ros2 topic pub /my_topic std_msgs/String "data: 'hello world'"
+<br>
     ALTERNATIVELY YOU CAN USE ANOTHER TOPIC JUST CHANGE THE NAME IN THE OBJ FILE 'my_topic_listener" to
-     '/topic" and use 'ros2 topic pub /topic std_msgs/String "data: 'helllllo world'"<br>
+     '/topic" and use 'ros2 topic pub /topic std_msgs/String "data: 'hello world'"<br>
      
  
 <h3>IV. Openmct-Tutorial / Base GUI Folder</h3>
 **OpenMCT Tutorial folder is included as the base folder to build off of for the project. It contains the base material for us to get started.**<br>
+
 1. The folder is labled 'gui-openmct'. <br>
 2. Using terminal, CD into that folder and type 'npm install' and once it is finished install all node packages, type 'npm start'. <br>
 3. Then in the browser, type 'localhost:8080' and you should see the openmct GUI. <br> 
+
 
 These directions are also located in the ReadMe located in the 'gui-openmct' folder.
 
