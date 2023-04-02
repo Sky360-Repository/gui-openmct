@@ -67,8 +67,8 @@ function StationPlugin() {
         openmct.composition.addProvider(compositionProvider);
 
         openmct.types.addType('example.telemetry', {
-            /* name: 'Celsius / Time',
-            description: 'Example telemetry point from our happy tutorial.', */
+            name: 'Station Data',
+            description: 'Temeletry points from Sky360 Station and Online APIs.', 
             cssClass: 'icon-telemetry'
         });        
     }
