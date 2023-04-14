@@ -10,6 +10,7 @@ var StaticServer = require('./static-server'); // tutorial file
 
 var expressWs = require('express-ws');
 var app = require('express')();
+var express = require('express');
 expressWs(app);
 
 var spacecraft = new Spacecraft();
@@ -24,6 +25,12 @@ app.use('/history', historyServer);
 app.use('/', staticServer);
 
 var port = process.env.PORT || 8080
+
+// Videostream static page
+app.use('/static', express.static('../stream'))
+// 3d View static page
+app.use('/threedview', express.static('../3dview'))
+
 
 app.listen(port, function () {
     console.log('Open MCT hosted at http://localhost:' + port);
