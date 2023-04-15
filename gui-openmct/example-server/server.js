@@ -26,10 +26,6 @@ app.use('/', staticServer);
 
 var port = process.env.PORT || 8080
 
-// Videostream static page
-app.use('/static', express.static('../stream'))
-// 3d View static page
-app.use('/threedview', express.static('../3dview'))
 
 
 app.listen(port, function () {
