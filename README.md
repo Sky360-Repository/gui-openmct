@@ -31,29 +31,34 @@ Clone this folder at the same level as the simpletracker repo<br>
 3. code .   [This step may take several minutes.]<br>
 4. Restart in Dev Container<br>
 5. cd gui-openmct/example-server<br>
-6. node server.js [or npm start]?<br>
+6. node server.js [or npm start]?
 
 <br><br><br><br>
-Recommendations to study if you're not familiar with any of the above:
-Study "Express" Node.js library tutorial
-Study the ROS2 Tutorial
-Study the OpenMCT Tutorials
+<h3>II. ROSBRIDGE</h3>
+We use the Rosbridge Suite to get data into the browser.<br>
+1. ROS2 sends data via Data Distribution Service (DDS) https://docs.ros.org/en/humble/Installation/DDS-Implementations.html The web browser consumes data via TCP packets. <br>
+2. Rosbridge will transform DDS to TCP so that the GUI can use the data as a json object. <br>
+3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
+4. Sample instructions to use Rosbridge are listed below in "Have Data Appear on GUI Using ROS2, Rosbridge".
+
+
+<br><br><br><br>
+Recommendations to study if you're not familiar with any of the above:<br>
+Study "Express" Node.js library tutorial<br>
+Study the ROS2 Tutorial<br>
+Study the OpenMCT Tutorials<br>
 
 
 <br><br><br><br>
 =====================================================================================================<br>
-THE FOLLOWING IS DEPRECATED.  SAVED HERE AS A RECORD AND FOR INFO.
+THE FOLLOWING IS DEPRECATED.  SAVED HERE AS A RECORD AND FOR INFO AS SOME OF IT IS STILL USEFUL.
 <h3><em>Deprecated Install Instructions without Docker</em></h3>
-1. Install Python
-2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
-3. Install Node.js and NPM. They are bundled together. https://nodejs.org/en/download
+1. Install Python<br>
+2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html<br>
+3. Install Node.js and NPM. They are bundled together. https://nodejs.org/en/download<br>
 
 
-<h3>II. ROSBRIDGE</h3>
-1. ROS2 sends data via Data Distribution Service (DDS) https://docs.ros.org/en/humble/Installation/DDS-Implementations.html The web browser consumes data via TCP packets. <br>
-2. Rosbridge will transform DDS to TCP so that the GUI can use the data as a json object. <br>
-3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
-4. Instructions to use Rosbridge are listed below in "Have Data Appear on GUI Using ROS2, Rosbridge".
+
 
 
 <h3>III. Have Data Appear on GUI Using ROS2, Rosbridge</h3>
@@ -61,14 +66,13 @@ THE FOLLOWING IS DEPRECATED.  SAVED HERE AS A RECORD AND FOR INFO.
 **For this sample, neither openmct nor node.js are needed. You only need ROS2 and python already installed. This demo will create a topic on the fly. You will not need to individually code a topic or ros2 node for this example.**
 
 <h4>INSTRUCTIONS</h4>
-    **You can clone this repo on your desktop.**<br>
     
 1. open index.html file (located in skygui folder) in browser.<br>
 
 2. in terminal make sure you have "sudo apt-get install ros-humble-rosbridge-*" 
     You'll only need to do this once. You can open the terminal from desktop, from within the main folder or anywhere.<br>
      
-3. in terminal type: "source /opt/ros/humble/setup.sh" and then "ros2 launch rosbridge_server rosbridge_websocket_launch.xml"<br>
+3. in terminal type: "source /opt/ros/humble/setup.sh" and then "ros2 launch rosbridge_server rosbridge_websocket.launch" or "ros2 launch rosbridge_server rosbridge_websocket_launch.xml"<br>
 
 4. in a 2nd terminal, run 'source': source /opt/ros/humble/setup.bash <br>
 
