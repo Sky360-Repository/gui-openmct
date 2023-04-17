@@ -1,10 +1,10 @@
 <h1>GUI with OpenMCT, Node.js/Express and ROS2</h1>
 
 ** All other Sky360GUI Repos are obsolete although some code will be reused. **
-<h3>Docker Build</h3>
+<h3>I. Docker Build</h3>
 You will need to build from two seperate repositories (simpletracker repo and gui-openmct repo) from github.com/Sky360-Repository. Save both repos in their respective folders onto the desktop or into a folder.
 <br><br><br>
-I. Instructions:<br><br>
+Instructions:<br><br>
 A. simpletracker repo:<br>
 1. git clone -b gui_videostream https://github.com/Sky360-Repository/simpletracker-ros2-ws/
 <br>
@@ -97,7 +97,7 @@ These directions are also located in the ReadMe located in the 'gui-openmct' fol
 ROS2 Nodes will be placed in this folder. Put them in the appropriate folder on your computer. In the meantime, I will add ROS2 within this repo.
 
 
-<h3>V. Set Up ROS2 Network Over Multiple Machines</h3>
+<h3>VI. Set Up ROS2 Network Over Multiple Machines</h3>
 I refer you to this excellent article: 
 https://roboticsbackend.com/ros2-multiple-machines-including-raspberry-pi/
 
