@@ -4,7 +4,7 @@
 <h3>I. Docker Build</h3>
 You will need to build from two seperate repositories (simpletracker repo and gui-openmct repo) from github.com/Sky360-Repository. Save both repos in their respective folders onto the desktop or into a folder.
 <br><br><br>
-Instructions:<br><br>
+<h4>Instructions:</h4><br><br>
 A. simpletracker repo:<br>
 1. git clone -b gui_videostream https://github.com/Sky360-Repository/simpletracker-ros2-ws/
 <br>
@@ -43,10 +43,10 @@ We use the Rosbridge Suite to get data into the browser.<br>
 
 
 <br><br><br><br>
-Recommendations to study if you're not familiar with any of the above:<br>
-Study "Express" Node.js library tutorial<br>
-Study the ROS2 Tutorial<br>
-Study the OpenMCT Tutorials<br>
+<h3>Study Recommendations if you're not familiar with any of the above:</h3><br>
+1. Study "Express" Node.js library tutorial<br>
+2. Study the ROS2 Tutorial<br>
+3. Study the OpenMCT Tutorials<br>
 
 
 <br><br><br><br>
