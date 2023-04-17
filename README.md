@@ -2,9 +2,39 @@
 <h1>GUI with OpenMCT and ROS2</h1>
 
 ** All other Sky360GUI Repos are obsolete although some code will be reused. **
+<h3>Docker Build</h3>
+You will need to build from two seperate repositories from github.com/Sky360-Repository.
 
-<h3>I. Docker build is pending.</h3>In the meantime, you can install all necessary software on a linux ubuntu environment.
+I. Instructions:<br>
+A. simpletracker repo:
+git clone -b gui_videostream https://github.com/Sky360-Repository/simpletracker-ros2-ws/
 
+[The commands below should be used to get this ROS package up and running in VSCode and using the ROS dev container]
+cd simpletracer-ros2-ws [open this file in VS Code.]
+code . [Type this in VS Code's terminal. 
+Restart in Dev container [popup box on lower right of VS Code Terminal. Click on Dev Container.n This may take a few minutes.]
+./setup.sh [Type in VS Code's terminal. This step is needed only once.]
+./build.sh  [Type this in VS Code's terminal.] 
+./launch.sh   [Type this in VS Code's terminal.] 
+<br><br>
+switch to another shell in simpletracker container
+start rosbridge_server:
+ros2 launch rosbridge_server rosbridge_websocket.launch [or type: ros2 launch rosbridge_server rosbridge_websocket_launch.xml  -depends on your files in your ros2 install]
+<br><br>ros2 launch rosbridge_server rosbridge_websocket.launch
+switch to another shell in simpletracker container
+check if messages are being sent:
+ros2 topic echo /sky360/frames/annotated/compressed --no-arr
+<br><br><br>
+B. gui-openmct repo:
+git clone -b gui_videostream https://github.com/Sky360-Repository/gui-openmct/
+cd gui-openmct
+code .   [This step may take several minutes.]
+Restart in Dev Container
+cd gui-openmct/example-server
+node server.js [or npm start]?
+,
+
+<h3><em>Deprecated Install Instructions without Docker</em></h3>
 1. Install Python
 2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 3. Install Node.js and NPM. They are bundled together. https://nodejs.org/en/download
