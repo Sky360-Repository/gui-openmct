@@ -4,36 +4,41 @@
 ** All other Sky360GUI Repos are obsolete although some code will be reused. **
 <h3>Docker Build</h3>
 You will need to build from two seperate repositories from github.com/Sky360-Repository.
-
-I. Instructions:<br>
+<br><br><br>
+I. Instructions:<br><br>
 A. simpletracker repo:
 git clone -b gui_videostream https://github.com/Sky360-Repository/simpletracker-ros2-ws/
-
-[The commands below should be used to get this ROS package up and running in VSCode and using the ROS dev container]
-cd simpletracer-ros2-ws [open this file in VS Code.]
-code . [Type this in VS Code's terminal. 
-Restart in Dev container [popup box on lower right of VS Code Terminal. Click on Dev Container.n This may take a few minutes.]
-./setup.sh [Type in VS Code's terminal. This step is needed only once.]
-./build.sh  [Type this in VS Code's terminal.] 
-./launch.sh   [Type this in VS Code's terminal.] 
+<br>
+The commands below should be used to get this ROS package up and running in VSCode and using the ROS dev container
+1. cd simpletracer-ros2-ws [open this file in VS Code.]
+2. code . [Type this in VS Code's terminal. 
+3. Restart in Dev container [popup box on lower right of VS Code Terminal. Click on Dev Container.n This may take a few minutes.]
+4. ./setup.sh [Type in VS Code's terminal. This step is needed only once.]
+5. ./build.sh  [Type this in VS Code's terminal.] 
+6. ./launch.sh   [Type this in VS Code's terminal.] 
 <br><br>
-switch to another shell in simpletracker container
-start rosbridge_server:
-ros2 launch rosbridge_server rosbridge_websocket.launch [or type: ros2 launch rosbridge_server rosbridge_websocket_launch.xml  -depends on your files in your ros2 install]
-<br><br>ros2 launch rosbridge_server rosbridge_websocket.launch
-switch to another shell in simpletracker container
-check if messages are being sent:
+switch to another shell in simpletracker container<br>
+start rosbridge_server:<br>
+ros2 launch rosbridge_server rosbridge_websocket.launch [or type: ros2 launch rosbridge_server rosbridge_websocket_launch.xml  -depends on your files in your ros2 install]<br>
+ros2 launch rosbridge_server rosbridge_websocket.launch<br>
+<br><br>
+switch to another shell in simpletracker container<br>
+check if messages are being sent:<br>
 ros2 topic echo /sky360/frames/annotated/compressed --no-arr
 <br><br><br>
-B. gui-openmct repo:
-git clone -b gui_videostream https://github.com/Sky360-Repository/gui-openmct/
-cd gui-openmct
-code .   [This step may take several minutes.]
-Restart in Dev Container
-cd gui-openmct/example-server
-node server.js [or npm start]?
-,
+B. gui-openmct repo:<br>
+Clone this folder at the same level as the simpletracker repo
+1. git clone -b gui_videostream https://github.com/Sky360-Repository/gui-openmct/<br>
+2. cd gui-openmct
+3. code .   [This step may take several minutes.]
+4. Restart in Dev Container
+5. cd gui-openmct/example-server
+6. node server.js [or npm start]?
 
+
+
+=====================================================================================================
+THE FOLLOWING IS DEPRECATED.  SAVED HERE AS A RECORD AND FOR INFO.
 <h3><em>Deprecated Install Instructions without Docker</em></h3>
 1. Install Python
 2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
@@ -42,7 +47,7 @@ node server.js [or npm start]?
 
 <h3>II. ROSBRIDGE</h3>
 1. ROS2 sends data via Data Distribution Service (DDS) https://docs.ros.org/en/humble/Installation/DDS-Implementations.html The web browser consumes data via TCP packets. <br>
-2. Rosbridge will transform DDS to TCP so that the GUI can use the data. <br>
+2. Rosbridge will transform DDS to TCP so that the GUI can use the data as a json object. <br>
 3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
 4. Instructions to use Rosbridge are listed below in "Have Data Appear on GUI Using ROS2, Rosbridge".
 
