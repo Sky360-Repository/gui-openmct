@@ -1,5 +1,4 @@
-# gui-openmct
-<h1>GUI with OpenMCT and ROS2</h1>
+<h1>GUI with OpenMCT, Node.js/Express and ROS2</h1>
 
 ** All other Sky360GUI Repos are obsolete although some code will be reused. **
 <h3>Docker Build</h3>
@@ -12,17 +11,16 @@ A. simpletracker repo:<br>
 The commands below should be used to get this ROS package up and running in VSCode and using the ROS dev container<br>
 2. cd simpletracer-ros2-ws [open this file in VS Code.]<br>
 3. code . [Type this in VS Code's terminal. <br>
-4. Restart in Dev container [popup box on lower right of VS Code Terminal. Click on Dev Container.n This may take a few minutes.]<br>
+4. Restart in Dev container [You will see a box popup on lower right of VS Code Terminal. Click on Dev Container. This may take a few/several minutes.]<br>
 5. ./setup.sh [Type in VS Code's terminal. This step is needed only once.]<br>
 6. ./build.sh  [Type this in VS Code's terminal.] <br>
 7. ./launch.sh   [Type this in VS Code's terminal.] 
 <br><br>
-switch to another shell in simpletracker container<br>
+switch to another terminal in simpletracker container [In VS Code.]<br>
 start rosbridge_server:<br>
-ros2 launch rosbridge_server rosbridge_websocket.launch [or type: ros2 launch rosbridge_server rosbridge_websocket_launch.xml  -depends on your files in your ros2 install]<br>
 ros2 launch rosbridge_server rosbridge_websocket.launch<br>
 <br><br>
-switch to another shell in simpletracker container<br>
+switch to another terminal in simpletracker container [In VS Code.]<br>
 check if messages are being sent:<br>
 ros2 topic echo /sky360/frames/annotated/compressed --no-arr
 <br><br><br>
@@ -34,6 +32,12 @@ Clone this folder at the same level as the simpletracker repo<br>
 4. Restart in Dev Container<br>
 5. cd gui-openmct/example-server<br>
 6. node server.js [or npm start]?<br>
+
+<br><br><br><br>
+Recommendations to study if you're not familiar with any of the above:
+Study "Express" Node.js library tutorial
+Study the ROS2 Tutorial
+Study the OpenMCT Tutorials
 
 
 <br><br><br><br>
