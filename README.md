@@ -27,6 +27,7 @@ ros2 topic echo /sky360/frames/annotated/compressed --no-arr
 B. gui-openmct repo:<br>
 Clone this folder at the same level as the simpletracker repo<br>
 1. git clone -b gui_videostream https://github.com/Sky360-Repository/gui-openmct/<br>
+Using this branch for now until it is merged into main.<br>
 2. cd gui-openmct<br>
 3. code .   [This step may take several minutes.]<br>
 4. Restart in Dev Container<br>

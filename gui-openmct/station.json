@@ -8,7 +8,7 @@
             "values": [
                 {
                     "key": "",
-                    "name": "Remove Graph and Add Camera Feeds Here",
+                    "name": "Remove Graph and Add Camera Feeds Here. PTZ is not in Alpha Version.",
                     "units": "",
                     "format": "",
                     "min": 0,
@@ -27,15 +27,15 @@
                     }
                 }
             ]
-        },        
+        },     
         {
             "name": "Map",
             "key": "map.feed",
             "values": [
                 {
                     "key": "",
-                    "name": "Map with Flight/ISS/Drone/Satellite Data",
-                    "units": "",
+                    "name": "Add Map displaying data from Flight/ISS/Drone/Satellite/Weather/Astronomical/etc",
+                    "unit": "",
                     "format": "",
                     "min": 0,
                     "max": 100,
@@ -190,8 +190,8 @@
             "values": [
                 {
                     "key": "value",
-                    "name": "Temperature-Celsius",
-                    "units": "℃",
+                    "name": "Temperature-Celsius Add a Graph for Humidity, etc also.",
+                    "unit": "Celsius",
                     "format": "float",
                     "min": 0,
                     "max": 120,                    
