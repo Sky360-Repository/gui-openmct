@@ -102,3 +102,6 @@ ROS2 Nodes will be placed in this folder. Put them in the appropriate folder on 
 I refer you to this excellent article: 
 https://roboticsbackend.com/ros2-multiple-machines-including-raspberry-pi/
 
+
+# Testing visualization of codebase
+[Link to visualization](https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=Sky360-Repository%2Fgui-openmct)
