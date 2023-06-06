@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../lib/eventemitter2.js"></script>
+        <script src="../lib/roslib.min.js"></script>
+    </head>
+    <body>
+        <div id="stream" style="position: relative; width: 70%; float: left">
+            <img width="860" height="860" id="image_sub" />
+            <canvas width="860" height="860" id="maskCanvas" style="position:absolute;top:0;left:0;z-index:10;"></canvas>
+        </div>
+        <button id="pauseBtn" onclick="pause()">Pause</button>
+        <button id="startBtn" onclick="start()">Start</button>
+        <script>
+        var imageBuffer = [];
+        var classificationBuffer = [];
+        const bufferSize = 200;
+        var imageSubPaused = false;
+        var classSubPaused = false;
+        var messageRate = 0;
+        function init() {
+            window.addEventListener('DOMContentLoaded', function () {
+                var ros = new ROSLIB.Ros({
+                    url: 'ws://localhost:8081'
+                });
+                ros.on('connection', function () {
+                    console.log('Connected to websocket server.');
+                });
+                ros.on('error', function (error) {
+                    console.log('Error connecting to websocket server: ', error);
+                });
+                ros.on('close', function () {
+                    console.log('Connection to websocket server closed.');
+                });
+                // Image Subscription
+                var imageData = new ROSLIB.Topic({
+                    ros: ros,
+                    name: '/sky360/frames/annotated/compressed',
+                    messageType: 'sensor_msgs/msg/CompressedImage'
+                });
+                // Classification Subscription
+                var classificationData = new ROSLIB.Topic({
+                    ros: ros,
+                    name: 'sky360/classification',
+                    messageType: 'std_msgs/String'
+                });
+                imageData.subscribe(function (message) {
+                    // updateMessageRate();
+                    if (document.getElementById('buffer_enabled').checked) {
+                        if (imageBuffer.length < bufferSize) {
+                            imageBuffer.push({data: message, timestamp: new Date()});
+                        }
+                    } else {
+                        document.getElementById('image_sub').src = "data:image/jpeg;base64," + message.data;
+                    }
+                });
+                classificationData.subscribe(function (message) {
+                    // updateMessageRate();
+                    // Add an object with data and timestamp instead of just the message data
+                    classificationBuffer.push({data: message, timestamp: new Date()});
+                    parseClassificationMsg(message);
+                });
+
+            });}
+
+            // function updateMessageRate() {
+            //         // Here you can update your messageRate value
+            //         messageRate++;
+            // }
+            function pause() {
+                // Pausing the subscriptions
+                imageSubPaused = true;
+                classSubPaused = true;
+            }
+            function start() {
+                // Starting the subscriptions
+                imageSubPaused = false;
+                classSubPaused = false;
+            }
+            function drawCircleAndPoint(obj, ctx) {
+                ctx.beginPath();
+                ctx.arc(obj.bbox.x + obj.bbox.width / 2, obj.bbox.y + obj.bbox.height / 2, 64, 0, 2 * Math.PI, false);
+                ctx.fillStyle = 'green';
+                ctx.fill();
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#003300';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(obj.bbox.x + obj.bbox.width / 2, obj.bbox.y + obj.bbox.height / 2, 3, 0, 2 * Math.PI, false);
+                ctx.fillStyle = 'red';
+                ctx.fill();
+                ctx.fillText(obj.classificationLabel, obj.bbox.x + obj.bbox.width + 10, obj.bbox.y + obj.bbox.height / 2);
+            }
+            function parseClassificationMsg(message) {
+                // Rest of your code here ...
+                // After console.log
+                var canvas = document.getElementById('maskCanvas');
+                var ctx = canvas.getContext('2d');
+                messageCopy.objects.forEach(obj => {
+                    drawCircleAndPoint(obj, ctx);
+                    setTimeout(function() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    }, 1000);
+                });
+            }
+            function bufferImages(imageData, classificationData) {
+                if(imageBuffer.length >= bufferSize) {
+                    imageBuffer.shift();
+                }
+                if(classificationBuffer.length >= bufferSize) {
+                    classificationBuffer.shift();
+                }
+                imageBuffer.push(imageData);
+                classificationBuffer.push(classificationData);
+            }
+            window.onload = init();
+        </script>
+    </body>
+</html>

@@ -7,7 +7,6 @@ var RealtimeServer = require('./realtime-server'); // tutorial file
 var HistoryServer = require('./history-server'); // tutorial file
 var StaticServer = require('./static-server'); // tutorial file
 
-
 var expressWs = require('express-ws');
 var app = require('express')();
 var express = require('express');
@@ -18,15 +17,11 @@ var realtimeServer = new RealtimeServer(spacecraft);
 var historyServer = new HistoryServer(spacecraft);
 var staticServer = new StaticServer();
 
-
-
 app.use('/realtime', realtimeServer);
 app.use('/history', historyServer);
 app.use('/', staticServer);
 
 var port = process.env.PORT || 8080
-
-
 
 app.listen(port, function () {
     console.log('Open MCT hosted at http://localhost:' + port);

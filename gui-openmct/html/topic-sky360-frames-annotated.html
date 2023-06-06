@@ -1,0 +1,103 @@
+<!-- ros2-topic-subscriber-1.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>/sky360/frames/annotated</title>
+  <script src="../lib/eventemitter2.js"></script>
+  <script src="../lib/roslib.min.js"></script>
+
+</head>
+<body>
+  <h1>/sky360/frames/annotated</h1>
+  <div id="messages"> </div>
+  <script type="text/javascript">
+    // Define the ROS Bridge connection
+    var ros = new ROSLIB.Ros({
+      url: 'ws://localhost:8081' // Change this to the appropriate WebSocket URL
+    });
+
+    // Define the topic to subscribe to
+    // var topicName = '/sky360/frames/annotated/compressed';
+    // var messageType = 'sensor_msgs/CompressedImage';
+
+    var topicName = '/sky360/frames/annotated';
+     var messageType = 'sensor_msgs/Image';
+
+    // var topicName = '/sky360/frames/foreground_mask';
+     // var messageType = 'sensor_msgs/Image';
+
+    // var topicName = '/sky360/frames/grey';
+     // var messageType = 'sensor_msgs/Image';
+
+    // var topicName = '/sky360/frames/masked';
+     // var messageType = 'sensor_msgs/Image';
+
+    // var topicName = '/sky360/frames/masked_background ';
+     // var messageType = 'sensor_msgs/Image';
+
+    // Create a Topic object for the subscription
+    var topic = new ROSLIB.Topic({
+      ros: ros,
+      name: topicName,
+      messageType: messageType
+    });
+
+    // Define the callback function for handling received messages
+    function messageCallback(message) {
+      // Create a copy of the message to avoid modifying the original message
+      var messageCopy = JSON.parse(JSON.stringify(message));
+
+      // Replace the array data with a placeholder text
+      messageCopy.data = '<sequence type: uint8, length: ' + message.data.length + '>';
+
+      // Display the modified message in the browser console
+      console.log('Received message:', messageCopy);
+      document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + '<br> Frame id: ' + message.header.frame_id + '<br> Data Format: '+ message.format + '<br> Data Length: '+ message.data.length + '<br> TimeStamp Seconds: '+ message.header.stamp.sec +'<br> TimeStamp Nanoseconds: '+ message.header.stamp.nanosec +  '<br><br>';
+    }
+
+    // Subscribe to the topic and specify the callback function
+    topic.subscribe(messageCallback);
+  </script>
+</body>
+</html>
+
+<!--
+Topics
+// /sky360/frames/annotated
+// /sky360/frames/annotated/compressed
+// /sky360/frames/dense_optical_flow
+// /sky360/frames/foreground_mask
+// /sky360/frames/grey
+// /sky360/frames/masked
+// /sky360/frames/masked_background
+// /sky360/frames/original
+
+// /sky360/camera/original
+// /sky360/camera/original/v1
+// /sky360/config/entries
+// /sky360/config/entry
+// /sky360/config/entry/update
+// /sky360/config/updated
+// /sky360/detector/bgs/bounding_boxes
+// /sky360/detector/bgs/bounding_boxes/v1
+// /sky360/detector/canny/bounding_boxes
+
+// /sky360/mask/image
+// /sky360/maskedcompressed
+// /sky360/observer/cloud_estimation
+// /sky360/observer/day_night_classifier
+// /sky360/simulation/output_frame
+// /sky360/tracker/detections
+// /sky360/tracker/prediction
+// /sky360/tracker/tracking_state
+// /sky360/tracker/trajectory
+// /sky360/visualiser/annotated_frame
+// /sky360/visualiser/dense_optical_flow_frame
+// /sky360/visualiser/foreground_mask_frame
+// /sky360/visualiser/grey_frame
+// /sky360/visualiser/masked_background_frame
+// /sky360/visualiser/masked_frame
+// /sky360/visualiser/original_camera_frame
+// /sky360/visualiser/original_frame
+// /sky360/visualiser/tracking_state -->

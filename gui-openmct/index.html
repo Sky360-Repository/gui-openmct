@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sky360 Station</title>
+    <title>Sky360 GUI</title>
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
-    <script src="openmct-plugins/dictionary-plugin.js"></script>
-    <script src="openmct-plugins/historical-telemetry-plugin.js"></script>
-    <script src="openmct-plugins/realtime-telemetry-plugin.js"></script>
-    <script src="openmct-plugins/admin-plugin.js"></script>
-    <script src="openmct-plugins/station-plugin.js"></script>
-    <script src="openmct-plugins/logging-plugin.js"></script>
-    <script src="openmct-custom-plugins/customContextMenuPlugin.js"></script>
+    <!-- <script src="dictionary-plugin.js"></script> -->
+    <!-- <script src="historical-telemetry-plugin.js"></script> -->
+    <!-- <script src="realtime-telemetry-plugin.js"></script> -->
+    <!-- <script src="admin-plugin.js"></script> -->
+    <!-- <script src="station-plugin.js"></script> -->
+    <!-- <script src="logging-plugin.js"></script> -->
 </head>
 <body>
     <script>
@@ -21,13 +20,12 @@
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
         openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.Espresso());
-        openmct.install(StationPlugin());
-        openmct.install(AdminPlugin());
-        openmct.install(LoggingPlugin());
-        openmct.install(DictionaryPlugin());
-        openmct.install(HistoricalTelemetryPlugin());
-        openmct.install(RealtimeTelemetryPlugin());
-        openmct.install(customContextMenuPlugin());
+        // openmct.install(StationPlugin());
+        // openmct.install(AdminPlugin());
+        // openmct.install(LoggingPlugin());
+        // openmct.install(DictionaryPlugin());
+        // openmct.install(HistoricalTelemetryPlugin());
+        // openmct.install(RealtimeTelemetryPlugin());
         openmct.start();
     </script>
 </body>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <script src="../lib/eventemitter2.js"></script>
+        <script src="../lib/roslib.min.js"></script>
+        <script type="text/javascript" type="text/javascript">
+            function init() {
+                // Connecting to ROS
+                // -----------------
+                var ros = new ROSLIB.Ros({
+                    url: 'ws://localhost:8081'
+                });
+                ros.on('connection', function () {
+                    console.log('Connected to websocket server.');
+                });
+                ros.on('error', function (error) {
+                    console.log('Error connecting to websocket server: ', error);
+                });
+                ros.on('close', function () {
+                    console.log('Connection to websocket server closed.');
+                });
+                // ----------------------
+
+                // Buffer for storing incoming images
+                var imageBuffer = [];
+                var bufferSize = 10;
+                var frameRate = 30; // target frames per second (FPS)
+
+                var listener = new ROSLIB.Topic({
+                    ros: ros,
+                    name: '/sky360/frames/annotated/compressed',
+                    messageType: 'sensor_msgs/msg/CompressedImage'
+                });
+
+                listener.subscribe(function (message) {
+                    if (document.getElementById('buffer_enabled').checked) {
+                        bufferSize = parseInt(document.getElementById('buffer_size').value);
+                        if (imageBuffer.length < bufferSize) {
+                            imageBuffer.push(message);
+                        }
+                    } else {
+                        document.getElementById('image_sub').src = "data:image/jpeg;base64," + message.data;
+                    }
+                });
+
+                function processImage() {
+                    frameRate = parseInt(document.getElementById('frame_rate').value);
+                    if (imageBuffer.length > 0 && document.getElementById('buffer_enabled').checked) {
+                        var message = imageBuffer.shift();
+                        document.getElementById('image_sub').src = "data:image/jpeg;base64," + message.data;
+                    }
+                    setTimeout(processImage, 1000 / frameRate);
+                }
+
+                // Call processImage for the first time
+                processImage();
+            }
+
+            window.onload = init;
+        </script>
+    </head>
+
+    <body>
+        <label for="buffer_enabled">Enable Buffer:</label>
+        <input type="checkbox" id="buffer_enabled" name="buffer_enabled" checked>
+        <br>
+        <label for="buffer_size">Buffer Size:</label>
+        <input type="number" id="buffer_size" name="buffer_size" min="1" max="100" value="10">
+        <br>
+        <label for="frame_rate">Frame Rate (FPS):</label>
+        <input type="number" id="frame_rate" name="frame_rate" min="1" max="60" value="30">
+        <br>
+        <img width="100%" id="image_sub" />
+    </body>
+
+</html>

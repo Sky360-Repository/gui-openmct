@@ -1,60 +1,31 @@
-# gui-openmct
-<h1>GUI with OpenMCT and ROS2</h1>
+# GUI with OpenMCT and ROS2
 
-** All other Sky360GUI Repos are obsolete although some code will be reused. **
+Before getting started with the GUI, please note that in order for the GUI to interact with the Sky360 Simpletracker ROS2 environment, the Simple tracker repo must be launched in a separate Docker container. That repo can be found [here](https://github.com/Sky360-Repository/simpletracker-ros2-ws).
 
-<h3>I. Docker build is pending.</h3>In the meantime, you can install all necessary software on a linux ubuntu environment.
+## Instructions
 
-1. Install Python
-2. Install ROS2 (Humble version) and all required dependencies. https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
-3. Install Node.js and NPM. They are bundled together. https://nodejs.org/en/download
+1. Clone the GUI repo:
 
+```bash
+git clone https://github.com/Sky360-Repository/gui-openmct/
+```
 
-<h3>II. ROSBRIDGE</h3>
-1. ROS2 sends data via Data Distribution Service (DDS) https://docs.ros.org/en/humble/Installation/DDS-Implementations.html The web browser consumes data via TCP packets. <br>
-2. Rosbridge will transform DDS to TCP so that the GUI can use the data. <br>
-3. Rosbridge is bundled in the Rosbridge_Suite. https://github.com/RobotWebTools/rosbridge_suite <br>
-4. Instructions to use Rosbridge are listed below in "Have Data Appear on GUI Using ROS2, Rosbridge".
+2. Navigate into the cloned directory:
 
+```bash
+cd gui-openmct
+```
 
-<h3>III. Have Data Appear on GUI Using ROS2, Rosbridge</h3>
-**This is a very preliminary sample only placed here so others can get quickly up to speed and see how ROS2 and the GUI can transmit data**
-**For this sample, neither openmct nor node.js are needed. You only need ROS2 and python already installed. This demo will create a topic on the fly. You will not need to individually code a topic or ros2 node for this example.**
+3. Open it in Visual Studio Code:
 
-<h4>INSTRUCTIONS</h4>
-    **You can clone this repo on your desktop.**<br>
-    
-1. open index.html file (located in skygui folder) in browser.<br>
+```bash
+code .
+```
 
-2. in terminal make sure you have "sudo apt-get install ros-humble-rosbridge-*" 
-    You'll only need to do this once. You can open the terminal from desktop, from within the main folder or anywhere.<br>
-     
-3. in terminal type: "source /opt/ros/humble/setup.sh" and then "ros2 launch rosbridge_server rosbridge_websocket_launch.xml"<br>
+4. Start the Docker application, then reopen the Visual Studio Code workspace in a Docker Container. Make sure you have the Visual Studio Code Docker extension installed.
 
-4. in a 2nd terminal, run 'source': source /opt/ros/humble/setup.bash <br>
+5. After the Docker container is open, the GUI will be accessible in a web browser on port 8080. You can access it by navigating to http://localhost:8080
 
-5. in the same 2nd termal run: ros2 topic pub /my_topic std_msgs/String "data: 'hello world'"
-<br>
-    ALTERNATIVELY YOU CAN USE ANOTHER TOPIC JUST CHANGE THE NAME IN THE OBJ FILE 'my_topic_listener" to
-     '/topic" and use 'ros2 topic pub /topic std_msgs/String "data: 'hello world'"<br>
-     
- 
-<h3>IV. Openmct-Tutorial / Base GUI Folder</h3>
-**OpenMCT Tutorial folder is included as the base folder to build off of for the project. It contains the base material for us to get started.**<br>
+6. You can now import links to pages to interact with the ROS2 system. In the newly opened browser window with OpenMCT, locate the menu on the left which includes folders. Find the folder named "My Items" and right click on it. Select the "Import JSON" option and select the file named "Import1.json" which will be located in the gui-openmct folder. Then do the same for the file named "Import2.json."
 
-1. The folder is labled 'gui-openmct'. <br>
-2. Using terminal, CD into that folder and type 'npm install' and once it is finished install all node packages, type 'npm start'. <br>
-3. Then in the browser, type 'localhost:8080' and you should see the openmct GUI. <br> 
-
-
-These directions are also located in the ReadMe located in the 'gui-openmct' folder.
-
-
-<h3>V. ROS2 Nodes and Topics</h3>
-ROS2 Nodes will be placed in this folder. Put them in the appropriate folder on your computer. In the meantime, I will add ROS2 within this repo.
-
-
-<h3>V. Set Up ROS2 Network Over Multiple Machines</h3>
-I refer you to this excellent article: 
-https://roboticsbackend.com/ros2-multiple-machines-including-raspberry-pi/
-
+**Note:** All other Sky360GUI Repos are obsolete although some code will be reused.

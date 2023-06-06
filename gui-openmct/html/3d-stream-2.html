@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Projection on Dome - Compressed Annotated Frames</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+      #image_sub {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="image_sub" />
+    <script src="../lib/three.min.js"></script>
+    <script src="../lib/OrbitControls.js"></script>
+    <script src="../lib/eventemitter2.js"></script>
+    <script src="../lib/roslib.min.js"></script>
+    <script type="text/javascript">
+        // ROS Bridge Connection ----------------------
+            var ros = new ROSLIB.Ros({
+                url: 'ws://localhost:8081',
+            });
+            ros.on('connection', function () {
+                console.log('Connected to websocket server.');
+            });
+            ros.on('error', function (error) {
+                console.log('Error connecting to websocket server: ', error);
+            });
+            ros.on('close', function () {
+                console.log('Connection to websocket server closed.');
+            });
+
+            var listener = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/annotated/compressed',
+                messageType: 'sensor_msgs/msg/CompressedImage',
+            });
+            listener.subscribe(function (message) {
+                // console.log('Received message on ' + listener.name);
+                // console.log(message);
+                document.getElementById('image_sub').src = 'data:image/jpeg;base64,' + message.data;
+            });
+
+      // Set up the scene, camera, and renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 2;
+
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Create the dome geometry
+      const domeRadius = 5;
+      const domeHeight = 2;
+      const domeSegments = 64;
+
+      function domeFunction(u, v, target) {
+        const x = u * domeRadius * 2 - domeRadius;
+        const z = v * domeRadius * 2 - domeRadius;
+        const y = -((x * x + z * z) / (4 * domeHeight)) + domeHeight;
+        target.set(x, y, z);
+      }
+
+      const domeGeometry = new THREE.ParametricGeometry(domeFunction, domeSegments, domeSegments);
+      const imageElement = document.getElementById('image_sub');
+      const imageTexture = new THREE.Texture(imageElement);
+      imageTexture.minFilter = THREE.LinearFilter;
+      imageTexture.magFilter = THREE.LinearFilter;
+      imageTexture.format = THREE.RGBFormat;
+      imageTexture.needsUpdate = true;
+
+      const domeMaterial = new THREE.MeshBasicMaterial({ map: imageTexture, side: THREE.DoubleSide });
+      const domeMesh = new THREE.Mesh(domeGeometry, domeMaterial);
+
+      scene.add(domeMesh);
+
+      // Add OrbitControls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.02;
+        controls.screenSpacePanning = false;
+        controls.minDistance = 0.1;
+        controls.maxDistance = 6; // Set the maximum zoom out distance
+
+        function updateTexture() {
+        imageTexture.needsUpdate = true;
+        }
+
+        imageElement.addEventListener('load', updateTexture);
+
+        // Render the scene
+        function animate() {
+            requestAnimationFrame(animate);
+            updateTexture();
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Resize the renderer when the window is resized
+        window.addEventListener('resize', function () {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        });
+        </script>
+    </body>
+</html>

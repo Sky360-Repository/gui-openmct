@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+        <script src="../lib/eventemitter2.js"></script>
+        <script src="../lib/roslib.min.js"></script>
+    <style>
+        body{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const ros = new ROSLIB.Ros({
+            url: 'ws://localhost:8081'
+        });
+
+        let initialValues = {};
+
+        // function to set ROS parameter
+        function setParameter(paramName, paramValue) {
+            const param = new ROSLIB.Param({
+                ros: ros,
+                name: 'configuration_service:' + paramName
+            });
+
+            param.get((result) => {
+                if (result !== paramValue) {
+                    param.set(paramValue, (result) => {
+                        console.log(`Parameter '${paramName}' set successfully:`, result);
+                    });
+                }
+            });
+        }
+
+        // function to save changes
+        function saveChanges() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                const inputValue = input.type === 'checkbox' ? input.checked : input.value;
+                if (initialValues[input.id] !== inputValue) {
+                    setParameter(input.id, inputValue);
+                }
+            });
+        }
+
+        // function to store initial values
+        function storeInitialValues() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                initialValues[input.id] = input.type === 'checkbox' ? input.checked : input.value;
+            });
+        }
+
+        // call storeInitialValues() when page is loaded
+        window.onload = storeInitialValues;
+
+    </script>
+
+    <!-- General Settings -->
+<h2>General Settings</h2>
+<label for="controller_type">Controller Type:</label>
+<form>
+<input type="text" id="controller_type" name="controller_type" value="camera" onchange="setParameter('controller_type', this.value)"><br>
+<label for="camera_mode">Camera Mode:</label>
+<input type="text" id="camera_mode" name="camera_mode" value="rtsp" onchange="setParameter('camera_mode', this.value)"><br>
+<label for="camera_uri">Camera URI:</label>
+<input type="text" id="camera_uri" name="camera_uri" value="rtsp://sky360:Sky360Sky!@192.168.0.43:554/cam/realmonitor?channel=1&subtype=2" onchange="setParameter('camera_uri', this.value)"><br>
+<label for="camera_video_file">Camera Video File:</label>
+<input type="text" id="camera_video_file" name="camera_video_file" value="plane_flying_past2.mkv" onchange="setParameter('camera_video_file', this.value)"><br>
+<label for="camera_video_loop">Camera Video Loop:</label>
+<input type="checkbox" id="camera_video_loop" name="camera_video_loop" checked onchange="setParameter('camera_video_loop', this.checked)"><br>
+
+<!-- Frame Provider Settings -->
+<h2>Frame Provider Settings</h2>
+<label for="frame_provider_resize_frame">Resize Frame:</label>
+<input type="checkbox" id="frame_provider_resize_frame" name="frame_provider_resize_frame" checked onchange="setParameter('frame_provider_resize_frame', this.checked)"><br>
+<label for="frame_provider_resize_dimension_h">Resize Dimension (Height):</label>
+<input type="number" id="frame_provider_resize_dimension_h" name="frame_provider_resize_dimension_h" value="960" onchange="setParameter('frame_provider_resize_dimension_h', parseInt(this.value))"><br>
+<label for="frame_provider_resize_dimension_w">Resize Dimension (Width):</label>
+<input type="number" id="frame_provider_resize_dimension_w" name="frame_provider_resize_dimension_w" value="960" onchange="setParameter('frame_provider_resize_dimension_w', parseInt(this.value))"><br>
+<label for="frame_provider_blur">Blur:</label>
+<input type="checkbox" id="frame_provider_blur" name="frame_provider_blur" checked onchange="setParameter('frame_provider_blur', this.checked)"><br>
+<label for="frame_provider_blur_radius">Blur Radius:</label>
+<input type="number" id="frame_provider_blur_radius" name="frame_provider_blur_radius" value="3" onchange="setParameter('frame_provider_blur_radius', parseInt(this.value))"><br>
+<label for="frame_provider_cuda_enable">CUDA Enable:</label>
+<input type="checkbox" id="frame_provider_cuda_enable" name="frame_provider_cuda_enable" onchange="setParameter('frame_provider_cuda_enable', this.checked)"><br>
+<!-- Visualizer Settings -->
+<h2>Visualizer Settings</h2>
+<label for="visualiser_bbox_line_thickness">BBox Line Thickness:</label>
+<input type="number" id="visualiser_bbox_line_thickness" name="visualiser_bbox_line_thickness" value="1" onchange="setParameter('visualiser_bbox_line_thickness', parseInt(this.value))"><br>
+<label for="visualiser_bbox_size">BBox Size:</label>
+<input type="number" id="visualiser_bbox_size" name="visualiser_bbox_size" value="64" onchange="setParameter('visualiser_bbox_size', parseInt(this.value))"><br>
+<label for="visualiser_log_status_to_console">Log Status to Console:</label>
+<input type="checkbox" id="visualiser_log_status_to_console" name="visualiser_log_status_to_console" onchange="setParameter('visualiser_log_status_to_console', this.checked)"><br>
+<label for="visualiser_frame_source">Frame Source:</label>
+<input type="text" id="visualiser_frame_source" name="visualiser_frame_source" value="original" onchange="setParameter('visualiser_frame_source', this.value)"><br>
+<label for="visualiser_resize_frame">Resize Frame:</label>
+<input type="checkbox" id="visualiser_resize_frame" name="visualiser_resize_frame" checked onchange="setParameter('visualiser_resize_frame', this.checked)"><br>
+<label for="visualiser_resize_dimension_h">Resize Dimension (Height):</label>
+<input type="number" id="visualiser_resize_dimension_h" name="visualiser_resize_dimension_h" value="960" onchange="setParameter('visualiser_resize_dimension_h', parseInt(this.value))"><br>
+<label for="visualiser_resize_dimension_w">Resize Dimension (Width):</label>
+<input type="number" id="visualiser_resize_dimension_w" name="visualiser_resize_dimension_w" value="960" onchange="setParameter('visualiser_resize_dimension_w', parseInt(this.value))"><br>
+<label for="visualiser_show_cropped_tracks">Show Cropped Tracks:</label>
+<input type="checkbox" id="visualiser_show_cropped_tracks" name="visualiser_show_cropped_tracks" checked onchange="setParameter('visualiser_show_cropped_tracks', this.checked)"><br>
+<label for="visualiser_show_trajectories">Show Trajectories:</label>
+<input type="checkbox" id="visualiser_show_trajectories" name="visualiser_show_trajectories" checked onchange="setParameter('visualiser_show_trajectories', this.checked)"><br>
+<label for="visualiser_cropped_zoom_factor">Cropped Zoom Factor:</label>
+<input type="number" id="visualiser_cropped_zoom_factor" name="visualiser_cropped_zoom_factor" value="2" onchange="setParameter('visualiser_cropped_zoom_factor', parseInt(this.value))"><br>
+<!-- Tracker Settings -->
+<h2>Tracker Settings</h2>
+<label for="tracker_type">Tracker Type:</label>
+<input type="text" id="tracker_type" name="tracker_type" value="CSRT" onchange="setParameter('tracker_type', this.value)"><br>
+<label for="tracker_stopwatch_enable">Stopwatch Enable:</label>
+<input type="checkbox" id="tracker_stopwatch_enable" name="tracker_stopwatch_enable" onchange="setParameter('tracker_stopwatch_enable', this.checked)"><br>
+<label for="tracker_active_only">Active Only:</label>
+<input type="checkbox" id="tracker_active_only" name="tracker_active_only" checked onchange="setParameter('tracker_active_only', this.checked)"><br>
+<label for="tracker_detection_mode">Detection Mode:</label>
+<input type="text" id="tracker_detection_mode" name="tracker_detection_mode" value="background_subtraction" onchange="setParameter('tracker_detection_mode', this.value)"><br>
+<label for="tracker_detection_sensitivity">Detection Sensitivity:</label>
+<input type="number" id="tracker_detection_sensitivity" name="tracker_detection_sensitivity" value="1" onchange="setParameter('tracker_detection_sensitivity', parseInt(this.value))"><br>
+<label for="tracker_max_active_trackers">Max Active Trackers:</label>
+<input type="number" id="tracker_max_active_trackers" name="tracker_max_active_trackers" value="10" onchange="setParameter('tracker_max_active_trackers', parseInt(this.value))"><br>
+<label for="tracker_min_centre_point_distance_between_bboxes">Min Centre Point Distance Between BBoxes:</label>
+<input type="number" id="tracker_min_centre_point_distance_between_bboxes" name="tracker_min_centre_point_distance_between_bboxes" value="64" onchange="setParameter('tracker_min_centre_point_distance_between_bboxes', parseInt(this.value))"><br>
+
+<!-- Background Subtractor Settings -->
+<h2>Background Subtractor Settings</h2>
+<label for="background_subtractor_type">Background Subtractor Type:</label>
+<input type="text" id="background_subtractor_type" name="background_subtractor_type" value="KNN" onchange="setParameter('background_subtractor_type', this.value)"><br>
+<label for="background_subtractor_sensitivity">Background Subtractor Sensitivity:</label>
+<input type="number" id="background_subtractor_sensitivity" name="background_subtractor_sensitivity" value="1" onchange="setParameter('background_subtractor_sensitivity', parseInt(this.value))"><br>
+<label for="background_subtractor_learning_rate">Background Subtractor Learning Rate:</label>
+<input type="number" id="background_subtractor_learning_rate" name="background_subtractor_learning_rate" value="0.05" onchange="setParameter('background_subtractor_learning_rate', parseFloat(this.value))"><br>
+<label for="background_subtractor_cuda_enable">CUDA Enable:</label>
+<input type="checkbox" id="background_subtractor_cuda_enable" name="background_subtractor_cuda_enable" onchange="setParameter('background_subtractor_cuda_enable', this.checked)"><br>
+
+<!-- Blob Detector Settings -->
+<h2>Blob Detector Settings</h2>
+<label for="blob_detector_type">Blob Detector Type:</label>
+<input type="text" id="blob_detector_type" name="blob_detector_type" value="sky360" onchange="setParameter('blob_detector_type', this.value)"><br>
+<label for="blob_detector_min_distance_between_blobs">Min Distance Between Blobs:</label>
+<input type="number" id="blob_detector_min_distance_between_blobs" name="blob_detector_min_distance_between_blobs" value="64" onchange="setParameter('blob_detector_min_distance_between_blobs', parseInt(this.value))"><br>
+
+<!-- Track Settings -->
+<h2>Track Settings</h2>
+<label for="track_path_plotting_enabled">Path Plotting Enabled:</label>
+<input type="checkbox" id="track_path_plotting_enabled" name="track_path_plotting_enabled" checked onchange="setParameter('track_path_plotting_enabled', this.checked)"><br>
+<label for="track_plotting_type">Plotting Type:</label>
+<input type="text" id="track_plotting_type" name="track_plotting_type" value="line" onchange="setParameter('track_plotting_type', this.value)"><br>
+<label for="track_validation_enable">Validation Enable:</label>
+<input type="checkbox" id="track_validation_enable" name="track_validation_enable" checked onchange="setParameter('track_validation_enable', this.checked)"><br>
+<label for="track_stationary_threshold">Stationary Threshold:</label>
+<input type="number" id="track_stationary_threshold" name="track_stationary_threshold" value="5" onchange="setParameter('track_stationary_threshold', parseInt(this.value))"><br>
+<label for="track_orphaned_threshold">Orphaned Threshold:</label>
+<input type="number" id="track_orphaned_threshold" name="track_orphaned_threshold" value="20" onchange="setParameter('track_orphaned_threshold', parseInt(this.value))"><br>
+<label for="track_prediction_enabled">Prediction Enabled:</label>
+<input type="checkbox" id="track_prediction_enabled" name="track_prediction_enabled" checked onchange="setParameter('track_prediction_enabled', this.checked)"><br>
+<!-- Mask Settings -->
+<h2>Mask Settings</h2>
+<label for="mask_type">Mask Type:</label>
+<input type="text" id="mask_type" name="mask_type" value="overlay_inverse" onchange="setParameter('mask_type', this.value)"><br>
+<label for="mask_pct">Mask Percentage:</label>
+<input type="number" id="mask_pct" name="mask_pct" value="10" onchange="setParameter('mask_pct', parseInt(this.value))"><br>
+<label for="mask_overlay_image_file_name">Mask Overlay Image File Name:</label>
+<input type="text" id="mask_overlay_image_file_name" name="mask_overlay_image_file_name" value="mask-shrubs-inverse-overlay.jpg" onchange="setParameter('mask_overlay_image_file_name', this.value)"><br>
+<label for="astro_mask_enable">Astro Mask Enable:</label>
+<input type="checkbox" id="astro_mask_enable" name="astro_mask_enable" onchange="setParameter('astro_mask_enable', this.checked)"><br>
+<!-- Dense Optical Flow Settings -->
+<h2>Dense Optical Flow Settings</h2>
+<label for="dense_optical_flow_h">Dense Optical Flow Height:</label>
+<input type="number" id="dense_optical_flow_h" name="dense_optical_flow_h" value="400" onchange="setParameter('dense_optical_flow_h', parseInt(this.value))"><br>
+<label for="dense_optical_flow_w">Dense Optical Flow Width:</label>
+<input type="number" id="dense_optical_flow_w" name="dense_optical_flow_w" value="480" onchange="setParameter('dense_optical_flow_w', parseInt(this.value))"><br>
+<label for="dense_optical_cuda_enable">CUDA Enable:</label>
+<input type="checkbox" id="dense_optical_cuda_enable" name="dense_optical_cuda_enable" onchange="setParameter('dense_optical_cuda_enable', this.checked)"><br>
+<!-- Observer Settings -->
+<h2>Observer Settings</h2>
+<label for="observer_timer_interval">Timer Interval:</label>
+<input type="number" id="observer_timer_interval" name="observer_timer_interval" value="30" onchange="setParameter('observer_timer_interval', parseInt(this.value))"><br>
+<label for="observer_day_night_brightness_threshold">Day-Night Brightness Threshold:</label>
+<input type="number" id="observer_day_night_brightness_threshold" name="observer_day_night_brightness_threshold" value="95" onchange="setParameter('observer_day_night_brightness_threshold', parseInt(this.value))"><br>
+
+
+    <button onclick="saveChanges()">Save</button>
+
+    </form>
+</body>
+</html>

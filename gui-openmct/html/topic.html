@@ -1,0 +1,413 @@
+<!-- ros2-topic-subscriber-1.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title class="currentTopicName"></title>
+        <script type="text/javascript" src="../lib/eventemitter2.js"></script>
+        <script type="text/javascript" src="../lib/roslib.min.js"></script>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet" />
+
+        <style>
+            #messages {
+              width: 100%;
+              height: 300px;
+            }
+            button.MuiButton-containedPrimary {
+                background-color: green;
+            }
+
+            button.MuiButton-containedSecondary {
+                background-color: red;
+            }
+          </style>
+    </head>
+
+    <body>
+        <h1 class="currentTopicName"></h1>
+
+        <!-- <button id="message-details-button">Get Topic Message Details</button><br> Message Details:<div id="message_details"></div> -->
+        <form>
+            <label for="topic-select">Topic:</label>
+            <select id="topic-select" onchange="chooseNewTopic()">
+                <option value="">Select a Topic</option>
+                <option value="sky360_frames_annotated_compressed">sky360_frames_annotated_compressed</option>
+                <option value="sky360_frames_annotated">sky360_frames_annotated</option>
+                <option value="sky360_frames_foreground_mask">sky360_frames_foreground_mask</option>
+                <option value="sky360_frames_grey">sky360_frames_grey</option>
+                <option value="sky360_frames_masked">sky360_frames_masked</option>
+                <option value="sky360_frames_masked_background">sky360_frames_masked_background</option>
+                <option value="sky360_frames_original">sky360_frames_original</option>
+                <option value="sky360_frames_dense_optical_flow">sky360_frames_dense_optical_flow</option>
+                <option value="sky360_detector_bgs_boundingboxes">sky360_detector_bgs_boundingboxes</option>
+                <option value="sky360_timeseries_classification">sky360_timeseries_classification</option>
+            </select>
+        </form>
+        <br><br>
+        <button id="start-button">Start</button>
+        <button id="pause-button">Pause</button>
+        <br><br>
+        Subscription Messages:<br>
+        <div id="messages"></div>
+        <br>
+        <script type="text/javascript">
+
+            // Get Topic from URL Query String parameter if if has been specified
+            const urlParams = new URLSearchParams(window.location.search);
+            const topicNameFromUrl = urlParams.get('topic');
+
+            // Set a default topic
+            var defaultTopicName = 'sky360_frames_annotated';
+
+            // Set the initial value of the current Topic to the default Topic
+            var currentTopicName = defaultTopicName;
+
+            // Set the current topic
+            // If a topic is specified in the url, use it
+            if (topicNameFromUrl) {
+                var currentTopicName = topicNameFromUrl;
+                // Displays the topic specified in the url in the page title and page header
+                document.querySelectorAll('.currentTopicName').forEach(element => {
+                    element.innerHTML = currentTopicName;
+                });
+                var topicSelect = document.getElementById("topic-select");
+                var option = topicSelect.querySelector('option[value="'+ topicNameFromUrl +'"]');
+                if (option) {
+                    option.selected = true;
+                }
+                // getTopicMessageDetails(currentTopicName);
+
+            // if no topic is specified in the url, use a default topic
+            } else {
+                // Displays the default topic in the page title and page header
+                document.querySelectorAll('.currentTopicName').forEach(element => {
+                    element.innerHTML = currentTopicName;
+                });
+                // getTopicMessageDetails(currentTopicName);
+            }
+
+            // Define ROS Bridge connection
+            var ros = new ROSLIB.Ros({ url: 'ws://localhost:8081' });
+
+            // Define ROS2 Topics available subscription
+            var sky360_frames_annotated_compressed = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/annotated/compressed',
+                messageType: 'sensor_msgs/CompressedImage'
+            });
+
+            var sky360_frames_annotated = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/annotated',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_frames_foreground_mask = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/foreground_mask',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_frames_grey = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/grey',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_frames_masked = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/masked',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_frames_masked_background = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/masked_background ',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_frames_original = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/original ',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_frames_dense_optical_flow = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/frames/dense_optical_flow',
+                messageType: 'sensor_msgs/Image',
+            });
+
+            var sky360_detector_bgs_boundingboxes = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/detector/bgs/bounding_boxes',
+                messageType: 'vision_msgs/msg/BoundingBox2DArray',
+            });
+
+            var sky360_timeseries_classification = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/timeseries_classification',
+                messageType: 'vision_msgs/Classification',
+            });
+
+            //BoundingBox2DArray
+
+            // Set the Topic variable from the selected currentTopicName
+            switch (currentTopicName) {
+                case "sky360_frames_annotated_compressed":
+                    currentTopic = sky360_frames_annotated_compressed;
+                    break;
+                case "sky360_frames_annotated":
+                    currentTopic = sky360_frames_annotated;
+                    break;
+                case "sky360_frames_foreground_mask":
+                    currentTopic = sky360_frames_foreground_mask;
+                    break;
+                case "sky360_frames_grey":
+                    currentTopic = sky360_frames_grey;
+                    break;
+                case "sky360_frames_masked":
+                    currentTopic = sky360_frames_masked;
+                    break;
+                case "sky360_frames_masked_background":
+                    currentTopic = sky360_frames_masked_background;
+                    break;
+                case "sky360_frames_original":
+                    currentTopic = sky360_frames_original;
+                    break;
+                case "sky360_frames_dense_optical_flow":
+                    currentTopic = sky360_frames_dense_optical_flow;
+                    break;
+                case "sky360_detector_bgs_boundingboxes":
+                    currentTopic = sky360_detector_bgs_boundingboxes;
+                    break;
+                case "sky360_timeseries_classification":
+                    currentTopic = sky360_timeseries_classification;
+                    break;
+                default:
+                    currentTopic = null;
+            }
+
+            // /sky360/camera/original
+            // /sky360/camera/original/v1
+
+            // self.image_publisher_ = self.create_publisher(Image, image_topic_, 5)
+            // self.camera_info_publisher_ = self.create_publisher(CameraInfo, camera_info_topic_, 5)
+
+            // self.pub_annotated_frame = self.create_publisher(Image, 'sky360/frames/annotated', publisher_qos_profile)
+            // self.pub_annotated_frame_compressed = self.create_publisher(CompressedImage, 'sky360/frames/annotated/compressed', 10)
+            // self.pub_foreground_mask_frame = self.create_publisher(Image, 'sky360/frames/foreground_mask', publisher_qos_profile)
+
+            // self.pub_dense_optical_flow_frame = self.create_publisher(Image, 'sky360/frames/dense_optical_flow', publisher_qos_profile)
+
+            // self.pub_original_frame = self.create_publisher(Image, 'sky360/frames/original', publisher_qos_profile)
+            // self.pub_masked_frame = self.create_publisher(Image, 'sky360/frames/masked', publisher_qos_profile)
+            // # self.pub_masked_frame_compressed = self.create_publisher(CompressedImage, 'sky360/frames/maskedcompressed', publisher_qos_profile)
+            // self.pub_grey_frame = self.create_publisher(Image, 'sky360/frames/grey', publisher_qos_profile)
+            // self.pub_environment_data = self.create_publisher(ObserverCloudEstimation, 'sky360/observer/cloud_estimation', publisher_qos_profile)
+            // self.pub_environment_data = self.create_publisher(ObserverDayNight, 'sky360/observer/day_night_classifier', publisher_qos_profile)
+            // self.pub_tracker_tracking_state = self.create_publisher(TrackingState, 'sky360/tracker/tracking_state', publisher_qos_profile)
+            // self.pub_tracker_detects = self.create_publisher(Detection2DArray, 'sky360/tracker/detections', publisher_qos_profile)
+            // self.pub_tracker_trajectory = self.create_publisher(TrackTrajectoryArray, 'sky360/tracker/trajectory', publisher_qos_profile)
+            // self.pub_tracker_prediction = self.create_publisher(TrackTrajectoryArray, 'sky360/tracker/prediction', publisher_qos_profile)
+            // self.pub_synthetic_frame = self.create_publisher(Image, 'sky360/simulation/output_frame', publisher_qos_profile)
+            // self.pub_synthetic_frame = self.create_publisher(Image, 'sky360/simulation/output_frame', publisher_qos_profile)
+            // self.pub_frame = self.create_publisher(Image, 'sky360/camera/original', publisher_qos_profile)
+            // self.config_change_publisher = self.create_publisher(ConfigEntryUpdatedArray, 'sky360/config/updated', publisher_qos_profile)
+
+
+            // self.pub_bounding_boxes = self.create_publisher(BoundingBox2DArray, 'sky360/detector/bgs/bounding_boxes', publisher_qos_profile)
+            // self.pub_bounding_boxes = self.create_publisher(BoundingBoxArray, 'sky360/detector/canny/bounding_boxes/v1', 10)
+
+            var testTopic = new ROSLIB.Topic({
+                ros: ros,
+                name: '/sky360/detector/bgs/bounding_boxes',
+                messageType: 'vision_msgs/msg/BoundingBox2DArray',
+            });
+            // testTopic.subscribe(messageCallback);
+
+            // var listener = new ROSLIB.Topic({
+            //     ros: ros,
+            //     name: '/sky360/frames/annotated/compressed',
+            //     messageType: 'sensor_msgs/msg/CompressedImage',
+            // });
+            // listener.subscribe(function (message) {
+            //     // console.log('Received message on ' + listener.name);
+            //     // console.log(message);
+            //     document.getElementById('image_sub').src = 'data:image/jpeg;base64,' + message.data;
+            // });
+
+            // ros2 topic echo 'vision_msgs/msg/BoundingBox2DArray'
+            // vision_msgs/BoundingBox2D.msg
+            // ---
+            // header:
+            //   stamp:
+            //     sec: 1683585399
+            //     nanosec: 221534513
+            //   frame_id: camera
+            // boxes: []
+            // ---
+
+            // /sky360/config/entries
+            // /sky360/config/entry
+            // /sky360/config/entry/update
+            // /sky360/config/updated
+
+            // /sky360/detector/bgs/bounding_boxes
+            // /sky360/detector/bgs/bounding_boxes/v1
+            // /sky360/detector/canny/bounding_boxes
+
+            // /sky360/mask/image
+
+            // /sky360/maskedcompressed
+
+            // /sky360/observer/cloud_estimation
+            // /sky360/observer/day_night_classifier
+
+            // /sky360/simulation/output_frame
+
+            // /sky360/tracker/detections
+            // /sky360/tracker/prediction
+            // /sky360/tracker/tracking_state
+            // /sky360/tracker/trajectory
+
+            // /sky360/visualiser/annotated_frame
+            // /sky360/visualiser/dense_optical_flow_frame
+            // /sky360/visualiser/foreground_mask_frame
+            // /sky360/visualiser/grey_frame
+            // /sky360/visualiser/masked_background_frame
+            // /sky360/visualiser/masked_frame
+            // /sky360/visualiser/original_camera_frame
+            // /sky360/visualiser/original_frame
+            // /sky360/visualiser/tracking_state
+
+            // Define the callback function for handling received messages from the topic
+            function messageCallback(message) {
+                console.log('messageCallback');
+                // if (currentTopic == sky360_detector_bgs_boundingboxes) {
+                //         if (typeof message.boxes !== 'undefined' && message.boxes !== []) {
+                //             // Access the length of the boxes array and retrieve its center position
+                //             // console.log(message);
+                //             console.log(message.boxes);
+                //             // console.log(message.boxes[0].center);
+                //         } else {
+                //             // Handle the case where the boxes array is undefined or empty
+                //             console.log(message);
+                //         }
+                // }
+                // Create a copy of the message to avoid modifying the original message
+                var messageCopy = JSON.parse(JSON.stringify(message));
+
+                // Replace the array data with a placeholder text
+                // messageCopy.data = '<sequence type: uint8, length: ' + message.data.length + '>';
+
+                // Display the modified message in the browser console
+                console.log('Received message:', messageCopy);
+                console.log(message);
+
+                // Display the JSON
+                var messageJSONString = JSON.stringify(message, null, 2);
+                var messageHeaderJSONString = JSON.stringify(message.header, null, 2);
+                var messageDataJSONString = JSON.stringify(message.data, null, 2);
+                var messageFormatJSONString = JSON.stringify(message.format, null, 2);
+
+                // Display a List of Messages Continually Appended onto with the Stream of Messages
+                // document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + displayContent;
+
+                // Display a Single Message Continually Replaced with the Stream of Messages
+                // document.getElementById('messages').innerText = messageHeaderJSONString + '\n' + messageFormatJSONString;
+                if (currentTopic == sky360_detector_bgs_boundingboxes) {
+                    if (typeof message.boxes !== 'undefined' && message.boxes !== [] ) {
+                        // Access the length of the boxes array and retrieve its center position
+                        if (typeof message.boxes[0] !== 'undefined' && message.boxes[0] !== [] ) {
+                            var contents = JSON.stringify(message.boxes[0].center.position) + " Seconds: " + message.header.stamp.sec + " Nanoseconds: " + message.header.stamp.nanosec +'<br>' ;
+                            console.log(message.header.stamp.sec);
+                            console.log(message.header.stamp.nanosec);
+                            console.log(message.boxes);
+                            document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + contents;
+                        } else {
+                            var contents =  "[] Seconds:" + message.header.stamp.sec + "\n Nanoseconds:" + message.header.stamp.nanosec ;
+
+                            console.log("Seconds: " +message.header.stamp.sec);
+                            console.log("Nanoseconds: " +message.header.stamp.nanosec);
+                            console.log(message);
+                            document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + contents+'<br>' ;
+                        }
+                    } else {
+                        // Handle the case where the boxes array is undefined or empty
+                        var contents = "[]";
+                        document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + contents+'<br>' ;
+                    }
+                    // document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + contents;
+                }
+                // document.getElementById('messages').innerHTML = document.getElementById('messages').innerHTML + contents;
+            }
+
+            // Auto subscribe to the topic and specify the callback function
+            // currentTopic.subscribe(messageCallback);
+
+            // Define function to start the subscription
+            function startSubscription() {
+                currentTopic.subscribe(messageCallback);
+                console.log('Subscription started');
+            }
+
+            // Define function to stop the subscription
+            function pauseSubscription() {
+                currentTopic.unsubscribe();
+                console.log('Subscription paused');
+            }
+
+            // Add event listeners to the start and stop buttons
+            var startButton = document.getElementById('start-button');
+            var pauseButton = document.getElementById('pause-button');
+            // var messageDetailsButton = document.getElementById('message-details-button');
+
+            startButton.addEventListener('click', startSubscription);
+            pauseButton.addEventListener('click', pauseSubscription);
+            // messageDetailsButton.addEventListener('click', getTopicMessageDetails);
+
+            // Define the chooseNewTopic function
+            function chooseNewTopic() {
+                // Get the selected option value
+                var topic = document.getElementById('topic-select').value;
+                // Reload the page with the selected option added to the URL string parameter named "topic"
+                window.location.href = window.location.pathname + '?topic=' + encodeURIComponent(topic);
+            }
+
+            // function messageDetailsCallback(result) {
+            //   console.log('Received message details response:', result);
+            //   // Log the message definition
+            //   console.log('Message definition:', result.typedef);
+            //   // Display the message in the browser
+            //   document.getElementById('message_details').innerHTML = JSON.stringify(result, null, 2);
+            // }
+
+            // // Define & Call for a Topic's Message Details
+            // function getTopicMessageDetails() {
+            //     // Reformat the topic name
+            //     // var topic = '/' + currentTopicName.replace(/_/g, '/');
+
+            //     var topic = '/sky360/frames/annotated/compressed';
+            //     // Define the messageDetailsService to get info about the format of message data for a Topic
+            //     var messageDetailsService = new ROSLIB.Service({
+            //         ros: ros,
+            //         name: '/rosapi/message_details',
+            //         serviceType: 'rosapi/MessageDetails'
+            //     });
+            //     console.log(JSON.stringify(messageDetailsService, null, 2));
+            //     var messageDetailsRequest = new ROSLIB.ServiceRequest({ type: topic });
+            //     console.log(JSON.stringify(messageDetailsRequest, null, 2));
+            //     //   messageDetailsService.callService(messageDetailsRequest, messageDetailsCallback);
+            //     // messageDetailsCallback();
+            //         messageDetailsService.callService(messageDetailsRequest, messageDetailsCallback);
+            // }
+
+        </script>
+    </body>
+</html>
