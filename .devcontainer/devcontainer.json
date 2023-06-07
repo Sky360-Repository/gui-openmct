@@ -25,6 +25,6 @@
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
     "forwardPorts": [8080],
-    "postCreateCommand": "node /app/gui-openmct/gui-openmct/example-server/server.js",
+    "postCreateCommand": "",
 	// Set *default* container specific settings.json values on container create.
 }

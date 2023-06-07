@@ -26,10 +26,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && \
     apt-get install -y nodejs
 
 # Clear cache and clone the latest version of the repository from the desired branch
-RUN --mount=type=cache,target=/tmp/git-cache git clone --depth 2 --branch gui_videostream https://github.com/Sky360-Repository/gui-openmct.git gui-openmct
+# RUN --mount=type=cache,target=/tmp/git-cache git clone --depth 2 --branch gui_videostream_2 https://github.com/Sky360-Repository/gui-openmct.git gui-openmct
 
 # Clone the OpenMCT repository (specific branch) and install its dependencies
-# RUN git clone -b gui_videostream https://github.com/Sky360-Repository/gui-openmct.git gui-openmct
+# RUN git clone -b gui_videostream_2 https://github.com/Sky360-Repository/gui-openmct.git gui-openmct
 WORKDIR /app/gui-openmct/gui-openmct
 
 RUN apt install -y chromium-bsu chromium-browser
@@ -47,7 +47,9 @@ COPY . /app
 EXPOSE 8080
 
 # Set working directory location
-WORKDIR /app/gui-openmct/gui-openmct/example-server
+# WORKDIR /app/gui-openmct/gui-openmct/example-server
+WORKDIR /app/gui-openmct/gui-openmct
 
 # Start the OpenMCT server
-CMD ["node", "/app/gui-openmct/gui-openmct/example-server/server.js"]
+# CMD ["node", "/app/gui-openmct/gui-openmct/example-server/server.js"]
+RUN npm start
