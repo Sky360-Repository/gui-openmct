@@ -48,8 +48,8 @@ EXPOSE 8080
 
 # Set working directory location
 # WORKDIR /app/gui-openmct/gui-openmct/example-server
-WORKDIR /app/gui-openmct/gui-openmct
+# WORKDIR /workspaces/gui-openmct/gui-openmct
 
 # Start the OpenMCT server
 # CMD ["node", "/app/gui-openmct/gui-openmct/example-server/server.js"]
-RUN npm start
+# RUN npm start
