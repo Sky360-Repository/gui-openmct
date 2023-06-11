@@ -1,1 +1,163 @@
-{"openmct":{"5e72f1da-3863-41a9-8b62-9a2ca0105c18":{"identifier":{"key":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","namespace":""},"name":"Demo","type":"folder","composition":[{"key":"75a8534a-b769-4440-953f-524eda8c2eb3","namespace":""},{"key":"2a06fba0-55db-4993-aef1-b48537eac593","namespace":""},{"key":"0844fe55-2190-4666-8f80-e361b81c12ab","namespace":""},{"key":"83dd5bf4-a6f2-4573-ac46-3f8fac947c2f","namespace":""},{"key":"4ce01870-7413-49c0-b8bb-1b7d20bc189c","namespace":""},{"key":"617cec0a-40e0-4537-a154-6fc1915e5749","namespace":""},{"key":"4e998b63-8081-4e3a-b8fb-e3535f43a58d","namespace":""},{"key":"00aeb2a4-f198-4412-9554-4d473289e962","namespace":""},{"key":"fd28ce37-e61f-435a-9142-b257a350b802","namespace":""},{"key":"7d1d39a1-efa4-46df-bd41-6cbd912170cf","namespace":""}],"modified":1686039568370,"location":"mine","persisted":1686039568370},"75a8534a-b769-4440-953f-524eda8c2eb3":{"identifier":{"key":"75a8534a-b769-4440-953f-524eda8c2eb3","namespace":""},"name":"3D Dome Editor","type":"webPage","url":"html/3d-dome-editor-v3.html","modified":1686037580054,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686037580054},"2a06fba0-55db-4993-aef1-b48537eac593":{"identifier":{"key":"2a06fba0-55db-4993-aef1-b48537eac593","namespace":""},"name":"3D Still Image","type":"webPage","url":"html/3d-image.html","modified":1686039615412,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686039615412},"0844fe55-2190-4666-8f80-e361b81c12ab":{"identifier":{"key":"0844fe55-2190-4666-8f80-e361b81c12ab","namespace":""},"name":"3D Recorded Video","type":"webPage","url":"html/3d-recorded-video.html","modified":1686039630761,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686039630761},"83dd5bf4-a6f2-4573-ac46-3f8fac947c2f":{"identifier":{"key":"83dd5bf4-a6f2-4573-ac46-3f8fac947c2f","namespace":""},"name":"3D Camera Stream","type":"webPage","url":"html/3d-stream.html","modified":1686037720241,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686037720241},"4ce01870-7413-49c0-b8bb-1b7d20bc189c":{"identifier":{"key":"4ce01870-7413-49c0-b8bb-1b7d20bc189c","namespace":""},"name":"Configurations","type":"webPage","url":"html/configuration.html","modified":1686037794459,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686037794459},"617cec0a-40e0-4537-a154-6fc1915e5749":{"identifier":{"key":"617cec0a-40e0-4537-a154-6fc1915e5749","namespace":""},"name":"Mask Editor","type":"webPage","url":"html/mask-with-button-controls.html","modified":1686037951862,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686037951862},"4e998b63-8081-4e3a-b8fb-e3535f43a58d":{"identifier":{"key":"4e998b63-8081-4e3a-b8fb-e3535f43a58d","namespace":""},"name":"Topic Subscription Demo","type":"webPage","url":"html/topic.html","modified":1686039344374,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686039344374},"00aeb2a4-f198-4412-9554-4d473289e962":{"identifier":{"key":"00aeb2a4-f198-4412-9554-4d473289e962","namespace":""},"name":"3D Camera Stream (Classification)","type":"webPage","url":"html/sky360-viewer-2.html","modified":1686039434075,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686039434075},"fd28ce37-e61f-435a-9142-b257a350b802":{"identifier":{"key":"fd28ce37-e61f-435a-9142-b257a350b802","namespace":""},"name":"2D Camera Stream","type":"webPage","url":"html/stream-6.html","modified":1686039537127,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686039537127},"7d1d39a1-efa4-46df-bd41-6cbd912170cf":{"identifier":{"key":"7d1d39a1-efa4-46df-bd41-6cbd912170cf","namespace":""},"name":"2D Camera Stream (Classification)","type":"webPage","url":"html/stream-7.html","notes":"","modified":1686039568361,"location":"5e72f1da-3863-41a9-8b62-9a2ca0105c18","persisted":1686039568361}},"rootId":"5e72f1da-3863-41a9-8b62-9a2ca0105c18"}
+{
+    "openmct": {
+        "a3af277f-47eb-4b10-988f-785a5c1c958a": {
+            "identifier": {
+                "key": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+                "namespace": ""
+            },
+            "name": "Demo",
+            "type": "folder",
+            "composition": [
+                {
+                    "key": "3d51a8ba-e476-48ef-9b54-a24592e82c74",
+                    "namespace": ""
+                },
+                {
+                    "key": "7206cf8e-ca1e-4b6b-a58d-f856fe030fa2",
+                    "namespace": ""
+                },
+                {
+                    "key": "61c14dea-c195-4736-9a1c-005450e3853a",
+                    "namespace": ""
+                },
+                {
+                    "key": "4b0b0592-e8d2-4c42-981c-c295d9991e75",
+                    "namespace": ""
+                },
+                {
+                    "key": "ed80621d-db55-4abb-a6a0-e5ecf0c122ec",
+                    "namespace": ""
+                },
+                {
+                    "key": "a3309522-104d-43ac-935c-e39b90ffeaf9",
+                    "namespace": ""
+                },
+                {
+                    "key": "0c1f75fd-294e-4959-a000-d3d2ababe3bc",
+                    "namespace": ""
+                },
+                {
+                    "key": "1772c542-caff-446e-ba46-2921242dd277",
+                    "namespace": ""
+                },
+                {
+                    "key": "fe746eb1-8811-4cca-9946-dfc609076cd5",
+                    "namespace": ""
+                }
+            ],
+            "modified": 1686519914638,
+            "location": "mine",
+            "persisted": 1686519914647
+        },
+        "3d51a8ba-e476-48ef-9b54-a24592e82c74": {
+            "identifier": {
+                "key": "3d51a8ba-e476-48ef-9b54-a24592e82c74",
+                "namespace": ""
+            },
+            "name": "3D Dome Editor",
+            "type": "webPage",
+            "url": "html/3d-dome-editor-v3.html",
+            "modified": 1686109811102,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811102
+        },
+        "7206cf8e-ca1e-4b6b-a58d-f856fe030fa2": {
+            "identifier": {
+                "key": "7206cf8e-ca1e-4b6b-a58d-f856fe030fa2",
+                "namespace": ""
+            },
+            "name": "3D Still Image",
+            "type": "webPage",
+            "url": "html/3d-image.html",
+            "modified": 1686109811103,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811103
+        },
+        "61c14dea-c195-4736-9a1c-005450e3853a": {
+            "identifier": {
+                "key": "61c14dea-c195-4736-9a1c-005450e3853a",
+                "namespace": ""
+            },
+            "name": "3D Recorded Video",
+            "type": "webPage",
+            "url": "html/3d-recorded-video.html",
+            "modified": 1686109811104,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811104
+        },
+        "4b0b0592-e8d2-4c42-981c-c295d9991e75": {
+            "identifier": {
+                "key": "4b0b0592-e8d2-4c42-981c-c295d9991e75",
+                "namespace": ""
+            },
+            "name": "Configurations",
+            "type": "webPage",
+            "url": "html/configuration.html",
+            "modified": 1686109811105,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811105
+        },
+        "ed80621d-db55-4abb-a6a0-e5ecf0c122ec": {
+            "identifier": {
+                "key": "ed80621d-db55-4abb-a6a0-e5ecf0c122ec",
+                "namespace": ""
+            },
+            "name": "Mask Editor",
+            "type": "webPage",
+            "url": "html/mask-with-button-controls.html",
+            "modified": 1686109811107,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811107
+        },
+        "a3309522-104d-43ac-935c-e39b90ffeaf9": {
+            "identifier": {
+                "key": "a3309522-104d-43ac-935c-e39b90ffeaf9",
+                "namespace": ""
+            },
+            "name": "Topic Subscription Demo",
+            "type": "webPage",
+            "url": "html/topic.html",
+            "modified": 1686109811107,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811107
+        },
+        "0c1f75fd-294e-4959-a000-d3d2ababe3bc": {
+            "identifier": {
+                "key": "0c1f75fd-294e-4959-a000-d3d2ababe3bc",
+                "namespace": ""
+            },
+            "name": "2D Camera Stream",
+            "type": "webPage",
+            "url": "html/stream-6.html",
+            "modified": 1686109811109,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811109
+        },
+        "1772c542-caff-446e-ba46-2921242dd277": {
+            "identifier": {
+                "key": "1772c542-caff-446e-ba46-2921242dd277",
+                "namespace": ""
+            },
+            "name": "2D Camera Stream (Classification)",
+            "type": "webPage",
+            "url": "html/stream-7.html",
+            "notes": "",
+            "modified": 1686109811110,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686109811110
+        },
+        "fe746eb1-8811-4cca-9946-dfc609076cd5": {
+            "identifier": {
+                "key": "fe746eb1-8811-4cca-9946-dfc609076cd5",
+                "namespace": ""
+            },
+            "name": "3D Camera Stream",
+            "type": "webPage",
+            "url": "html/3d-stream-2.html",
+            "modified": 1686519892189,
+            "location": "a3af277f-47eb-4b10-988f-785a5c1c958a",
+            "persisted": 1686519892189
+        }
+    },
+    "rootId": "a3af277f-47eb-4b10-988f-785a5c1c958a"
+}
